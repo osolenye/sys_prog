@@ -1,14 +1,14 @@
 ﻿namespace sys_prog
 {
-    partial class Form1
+    partial class Form2
     {
         /// <summary>
-        ///  Required designer variable.
+        /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        ///  Clean up any resources being used.
+        /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
@@ -23,8 +23,8 @@
         #region Windows Form Designer generated code
 
         /// <summary>
-        ///  Required method for Designer support - do not modify
-        ///  the contents of this method with the code editor.
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
@@ -34,33 +34,33 @@
             // 
             // button1
             // 
-            button1.Location = new Point(340, 12);
+            button1.Location = new Point(356, 12);
             button1.Name = "button1";
             button1.Size = new Size(94, 29);
             button1.TabIndex = 0;
-            button1.Text = "Практика";
+            button1.Text = "Теория";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(345, 140);
+            label1.Location = new Point(356, 76);
             label1.Name = "label1";
-            label1.Size = new Size(89, 20);
+            label1.Size = new Size(100, 20);
             label1.TabIndex = 1;
-            label1.Text = "theory page";
+            label1.Text = "practice page";
             label1.Click += label1_Click;
             // 
-            // Form1
+            // Form2
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(label1);
             Controls.Add(button1);
-            Name = "Form1";
-            Text = "Form1";
+            Name = "Form2";
+            Text = "Form2";
             ResumeLayout(false);
             PerformLayout();
         }
