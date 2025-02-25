@@ -83,24 +83,25 @@ namespace sys_prog
         //}
         private void UpdateDataGridView()
         {
+            // Очищаем все строки
             dataGridViewArray.Rows.Clear();
 
-            if (_currentAlgorithm != null)
+            if (_currentAlgorithm == null)
+                return;
+
+            int[] currentArray = _currentAlgorithm.GetArray();
+
+            // Если столбцы еще не созданы, создаем один столбец
+            if (dataGridViewArray.ColumnCount == 0)
             {
-                int[] currentArray = _currentAlgorithm.GetArray();
+                dataGridViewArray.Columns.Add("Value", "Значение");
+            }
 
-                Console.WriteLine($"Обновление DataGridView. Элементов: {currentArray.Length}");
-
-                if (dataGridViewArray.ColumnCount == 0)
-                {
-                    dataGridViewArray.Columns.Add("Value", "Значение");
-                }
-
-                foreach (int value in currentArray)
-                {
-                    Console.WriteLine($"Добавляем в DataGridView: {value}");
-                    dataGridViewArray.Rows.Add(value);
-                }
+            // Добавляем каждое значение массива как новую строку
+            foreach (int value in currentArray)
+            {
+                // Убедитесь, что значение добавляется как объект
+                dataGridViewArray.Rows.Add(new object[] { value });
             }
         }
         private void InitializeAlgorithm(int[] array)
@@ -121,13 +122,14 @@ namespace sys_prog
                     _currentAlgorithm = new SelectionSort(array);
                     break;
                 case "Linear Search":
-                    _currentAlgorithm = new LinearSearch(array, 5);
+                    _currentAlgorithm = new LinearSearch(array, 5); // Ищем число 5
                     break;
                 default:
                     MessageBox.Show("Неизвестный алгоритм.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
             }
 
+            // Обновляем DataGridView после инициализации алгоритма
             UpdateDataGridView();
         }
         private void buttonGenerateArray_Click(object sender, EventArgs e)
