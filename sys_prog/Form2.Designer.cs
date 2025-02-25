@@ -29,13 +29,15 @@
         private void InitializeComponent()
         {
             button1 = new Button();
-            comboBox1 = new ComboBox();
-            textBox1 = new TextBox();
-            button2 = new Button();
-            button3 = new Button();
-            button4 = new Button();
-            button5 = new Button();
-            button6 = new Button();
+            comboBoxAlgorithm = new ComboBox();
+            textBoxArray = new TextBox();
+            buttonGenerateArray = new Button();
+            buttonInputArray = new Button();
+            buttonLastStep = new Button();
+            buttonPreviousStep = new Button();
+            buttonNextStep = new Button();
+            dataGridViewArray = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewArray).BeginInit();
             SuspendLayout();
             // 
             // button1
@@ -48,81 +50,95 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
-            // comboBox1
+            // comboBoxAlgorithm
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(3, 86);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(151, 28);
-            comboBox1.TabIndex = 1;
+            comboBoxAlgorithm.FormattingEnabled = true;
+            comboBoxAlgorithm.Items.AddRange(new object[] { "Bubble Sort", "Selection Sort", "Linear Search" });
+            comboBoxAlgorithm.Location = new Point(3, 86);
+            comboBoxAlgorithm.Name = "comboBoxAlgorithm";
+            comboBoxAlgorithm.Size = new Size(151, 28);
+            comboBoxAlgorithm.TabIndex = 1;
+            comboBoxAlgorithm.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
-            // textBox1
+            // textBoxArray
             // 
-            textBox1.Location = new Point(325, 87);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(125, 27);
-            textBox1.TabIndex = 2;
+            textBoxArray.Location = new Point(325, 87);
+            textBoxArray.Multiline = true;
+            textBoxArray.Name = "textBoxArray";
+            textBoxArray.Size = new Size(125, 34);
+            textBoxArray.TabIndex = 2;
             // 
-            // button2
+            // buttonGenerateArray
             // 
-            button2.Location = new Point(354, 145);
-            button2.Name = "button2";
-            button2.Size = new Size(94, 29);
-            button2.TabIndex = 3;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
+            buttonGenerateArray.Location = new Point(325, 129);
+            buttonGenerateArray.Name = "buttonGenerateArray";
+            buttonGenerateArray.Size = new Size(126, 29);
+            buttonGenerateArray.TabIndex = 3;
+            buttonGenerateArray.Text = "Сгенерировать";
+            buttonGenerateArray.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // buttonInputArray
             // 
-            button3.Location = new Point(354, 180);
-            button3.Name = "button3";
-            button3.Size = new Size(94, 29);
-            button3.TabIndex = 4;
-            button3.Text = "button3";
-            button3.UseVisualStyleBackColor = true;
+            buttonInputArray.Location = new Point(343, 164);
+            buttonInputArray.Name = "buttonInputArray";
+            buttonInputArray.Size = new Size(94, 29);
+            buttonInputArray.TabIndex = 4;
+            buttonInputArray.Text = "Ввести";
+            buttonInputArray.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // buttonLastStep
             // 
-            button4.Location = new Point(354, 250);
-            button4.Name = "button4";
-            button4.Size = new Size(94, 29);
-            button4.TabIndex = 5;
-            button4.Text = "button4";
-            button4.UseVisualStyleBackColor = true;
+            buttonLastStep.Location = new Point(325, 269);
+            buttonLastStep.Name = "buttonLastStep";
+            buttonLastStep.Size = new Size(126, 29);
+            buttonLastStep.TabIndex = 5;
+            buttonLastStep.Text = "Последний шаг";
+            buttonLastStep.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // buttonPreviousStep
             // 
-            button5.Location = new Point(354, 215);
-            button5.Name = "button5";
-            button5.Size = new Size(94, 29);
-            button5.TabIndex = 6;
-            button5.Text = "button5";
-            button5.UseVisualStyleBackColor = true;
+            buttonPreviousStep.Location = new Point(343, 199);
+            buttonPreviousStep.Name = "buttonPreviousStep";
+            buttonPreviousStep.Size = new Size(94, 29);
+            buttonPreviousStep.TabIndex = 6;
+            buttonPreviousStep.Text = "Пред. шаг";
+            buttonPreviousStep.UseVisualStyleBackColor = true;
             // 
-            // button6
+            // buttonNextStep
             // 
-            button6.Location = new Point(356, 285);
-            button6.Name = "button6";
-            button6.Size = new Size(94, 29);
-            button6.TabIndex = 7;
-            button6.Text = "button6";
-            button6.UseVisualStyleBackColor = true;
+            buttonNextStep.Location = new Point(343, 234);
+            buttonNextStep.Name = "buttonNextStep";
+            buttonNextStep.Size = new Size(94, 29);
+            buttonNextStep.TabIndex = 7;
+            buttonNextStep.Text = "След. шаг";
+            buttonNextStep.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewArray
+            // 
+            dataGridViewArray.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewArray.Location = new Point(488, 86);
+            dataGridViewArray.Name = "dataGridViewArray";
+            dataGridViewArray.RowHeadersWidth = 51;
+            dataGridViewArray.Size = new Size(300, 188);
+            dataGridViewArray.TabIndex = 8;
             // 
             // Form2
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(button6);
-            Controls.Add(button5);
-            Controls.Add(button4);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(textBox1);
-            Controls.Add(comboBox1);
+            Controls.Add(dataGridViewArray);
+            Controls.Add(buttonNextStep);
+            Controls.Add(buttonPreviousStep);
+            Controls.Add(buttonLastStep);
+            Controls.Add(buttonInputArray);
+            Controls.Add(buttonGenerateArray);
+            Controls.Add(textBoxArray);
+            Controls.Add(comboBoxAlgorithm);
             Controls.Add(button1);
             Name = "Form2";
             Text = "Form2";
+            ((System.ComponentModel.ISupportInitialize)dataGridViewArray).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -130,12 +146,13 @@
         #endregion
 
         private Button button1;
-        private ComboBox comboBox1;
-        private TextBox textBox1;
-        private Button button2;
-        private Button button3;
-        private Button button4;
-        private Button button5;
-        private Button button6;
+        private ComboBox comboBoxAlgorithm;
+        private TextBox textBoxArray;
+        private Button buttonGenerateArray;
+        private Button buttonInputArray;
+        private Button buttonLastStep;
+        private Button buttonPreviousStep;
+        private Button buttonNextStep;
+        private DataGridView dataGridViewArray;
     }
 }
