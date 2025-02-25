@@ -18,7 +18,17 @@ namespace sys_prog
         public Form2()
         {
             InitializeComponent();
+            dataGridViewArray.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewArray.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+
+
+            dataGridViewArray.DefaultCellStyle.Font = new Font("Arial", 12); // Увеличиваем шрифт
+            dataGridViewArray.DefaultCellStyle.ForeColor = Color.Black; // Делаем текст черным
+            dataGridViewArray.DefaultCellStyle.BackColor = Color.White; // Убедимся, что фон белый
+
+
             comboBoxAlgorithm.SelectedIndex = 0; // Выбираем первый алгоритм по умолчанию
+
             buttonGenerateArray.Click += buttonGenerateArray_Click;
             buttonInputArray.Click += buttonInputArray_Click;
             buttonNextStep.Click += buttonNextStep_Click;
@@ -50,6 +60,27 @@ namespace sys_prog
         {
             textBoxArray.Text = string.Join(", ", array);
         }
+        //private void UpdateDataGridView()
+        //{
+        //    dataGridViewArray.Rows.Clear();
+
+        //    if (_currentAlgorithm != null)
+        //    {
+        //        int[] currentArray = _currentAlgorithm.GetArray();
+
+        //        // Если столбцы еще не добавлены, добавляем один
+        //        if (dataGridViewArray.ColumnCount == 0)
+        //        {
+        //            dataGridViewArray.Columns.Add("Value", "Значение");
+        //        }
+
+        //        // Заполняем DataGridView
+        //        foreach (int value in currentArray)
+        //        {
+        //            dataGridViewArray.Rows.Add(value);
+        //        }
+        //    }
+        //}
         private void UpdateDataGridView()
         {
             dataGridViewArray.Rows.Clear();
@@ -58,15 +89,16 @@ namespace sys_prog
             {
                 int[] currentArray = _currentAlgorithm.GetArray();
 
-                // Если столбцы еще не добавлены, добавляем один
+                Console.WriteLine($"Обновление DataGridView. Элементов: {currentArray.Length}");
+
                 if (dataGridViewArray.ColumnCount == 0)
                 {
                     dataGridViewArray.Columns.Add("Value", "Значение");
                 }
 
-                // Заполняем DataGridView
                 foreach (int value in currentArray)
                 {
+                    Console.WriteLine($"Добавляем в DataGridView: {value}");
                     dataGridViewArray.Rows.Add(value);
                 }
             }
