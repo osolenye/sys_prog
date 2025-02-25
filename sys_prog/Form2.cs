@@ -18,6 +18,12 @@ namespace sys_prog
         public Form2()
         {
             InitializeComponent();
+            comboBoxAlgorithm.SelectedIndex = 0; // Выбираем первый алгоритм по умолчанию
+            buttonGenerateArray.Click += buttonGenerateArray_Click;
+            buttonInputArray.Click += buttonInputArray_Click;
+            buttonNextStep.Click += buttonNextStep_Click;
+            buttonPreviousStep.Click += buttonPreviousStep_Click;
+            buttonLastStep.Click += buttonLastStep_Click;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -47,9 +53,18 @@ namespace sys_prog
         private void UpdateDataGridView()
         {
             dataGridViewArray.Rows.Clear();
+
             if (_currentAlgorithm != null)
             {
                 int[] currentArray = _currentAlgorithm.GetArray();
+
+                // Если столбцы еще не добавлены, добавляем один
+                if (dataGridViewArray.ColumnCount == 0)
+                {
+                    dataGridViewArray.Columns.Add("Value", "Значение");
+                }
+
+                // Заполняем DataGridView
                 foreach (int value in currentArray)
                 {
                     dataGridViewArray.Rows.Add(value);
@@ -58,6 +73,12 @@ namespace sys_prog
         }
         private void InitializeAlgorithm(int[] array)
         {
+            if (comboBoxAlgorithm.SelectedItem == null)
+            {
+                MessageBox.Show("Выберите алгоритм перед запуском.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             string algorithmName = comboBoxAlgorithm.SelectedItem.ToString();
             switch (algorithmName)
             {
@@ -68,8 +89,11 @@ namespace sys_prog
                     _currentAlgorithm = new SelectionSort(array);
                     break;
                 case "Linear Search":
-                    _currentAlgorithm = new LinearSearch(array, 5); // Ищем число 5
+                    _currentAlgorithm = new LinearSearch(array, 5);
                     break;
+                default:
+                    MessageBox.Show("Неизвестный алгоритм.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
             }
 
             UpdateDataGridView();
@@ -127,7 +151,7 @@ namespace sys_prog
 
         private void comboBoxAlgorithm_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(comboBoxAlgorithm.SelectedItem?.ToString()))
+            if (comboBoxAlgorithm.SelectedItem == null)
                 return;
 
             if (_originalArray == null)

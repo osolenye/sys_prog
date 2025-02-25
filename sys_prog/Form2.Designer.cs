@@ -116,10 +116,11 @@
             // dataGridViewArray
             // 
             dataGridViewArray.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewArray.Location = new Point(488, 86);
+            dataGridViewArray.Dock = DockStyle.Right;
+            dataGridViewArray.Location = new Point(500, 0);
             dataGridViewArray.Name = "dataGridViewArray";
             dataGridViewArray.RowHeadersWidth = 51;
-            dataGridViewArray.Size = new Size(300, 188);
+            dataGridViewArray.Size = new Size(300, 450);
             dataGridViewArray.TabIndex = 8;
             // 
             // Form2
