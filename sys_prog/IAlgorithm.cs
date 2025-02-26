@@ -9,6 +9,7 @@ namespace sys_prog
     public interface IAlgorithm
     {
         bool NextStep(); // Выполняет следующий шаг алгоритма
+        bool PreviousStep(); // Возвращает на предыдущий шаг
         void Reset(); // Сбрасывает алгоритм к начальному состоянию
         int[] GetArray(); // Возвращает текущее состояние массива
     }

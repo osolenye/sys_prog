@@ -166,12 +166,18 @@ namespace sys_prog
 
             UpdateDataGridView();
         }
+
         private void buttonPreviousStep_Click(object sender, EventArgs e)
         {
             if (_currentAlgorithm == null)
                 return;
 
-            _currentAlgorithm.Reset(); // Возвращаемся к началу
+            bool hasPreviousStep = _currentAlgorithm.PreviousStep();
+            if (!hasPreviousStep)
+            {
+                MessageBox.Show("Вы уже на первом шаге.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
             UpdateDataGridView();
         }
         private void buttonLastStep_Click(object sender, EventArgs e)
