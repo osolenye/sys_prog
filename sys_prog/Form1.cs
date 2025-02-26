@@ -9,6 +9,7 @@ namespace sys_prog
         public Form1()
         {
             InitializeComponent();
+
             // Очищаем все существующие вкладки
             tabControl1.TabPages.Clear();
 
@@ -87,18 +88,6 @@ public class LinearSearch
         return -1; // Элемент не найден
     }
 }");
-
-            AddAlgorithmTab("Без видео", "Пример без видео",
-                "Этот алгоритм не имеет ссылки на видео.",
-                null, // Нет ссылки на видео
-                @"
-public class Example
-{
-    public static void Run()
-    {
-        Console.WriteLine(""Пример без видео."");
-    }
-}");
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -144,7 +133,21 @@ public class Example
                 };
 
                 // Добавляем обработчик события LinkClicked
-                videoLink.LinkClicked += (s, e) => Process.Start(videoUrl);
+                videoLink.LinkClicked += (s, e) =>
+                {
+                    try
+                    {
+                        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                        {
+                            FileName = videoUrl,
+                            UseShellExecute = true // Важно для корректной обработки URL
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Не удалось открыть видео: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                };
 
                 // Добавляем ссылку на вкладку
                 tabPage.Controls.Add(videoLink);
@@ -168,11 +171,6 @@ public class Example
 
             // Добавляем вкладку в TabControl
             tabControl1.TabPages.Add(tabPage);
-        }
-
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
