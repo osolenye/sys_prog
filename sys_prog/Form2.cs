@@ -121,8 +121,8 @@ namespace sys_prog
                 case "Selection Sort":
                     _currentAlgorithm = new SelectionSort(array);
                     break;
-                case "Linear Search":
-                    _currentAlgorithm = new LinearSearch(array, 5); // Ищем число 5
+                case "Merge Sort":
+                    _currentAlgorithm = new MergeSort(array);
                     break;
                 default:
                     MessageBox.Show("Неизвестный алгоритм.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);

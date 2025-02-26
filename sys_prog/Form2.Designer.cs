@@ -56,7 +56,7 @@
             // comboBoxAlgorithm
             // 
             comboBoxAlgorithm.FormattingEnabled = true;
-            comboBoxAlgorithm.Items.AddRange(new object[] { "Bubble Sort", "Selection Sort", "Linear Search" });
+            comboBoxAlgorithm.Items.AddRange(new object[] { "Bubble Sort", "Selection Sort", "Merge Sort" });
             comboBoxAlgorithm.Location = new Point(3, 86);
             comboBoxAlgorithm.Name = "comboBoxAlgorithm";
             comboBoxAlgorithm.Size = new Size(151, 28);
