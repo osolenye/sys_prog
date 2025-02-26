@@ -46,55 +46,65 @@ namespace sys_prog
             return (int[])_history[_step].Clone();
         }
 
-        public void Sort(int[] array)
+        public void Sort()
         {
-            if (array.Length <= 1)
-            {
-                SaveState(array);
-                return;
-            }
-
-            int mid = array.Length / 2;
-            int[] left = new int[mid];
-            int[] right = new int[array.Length - mid];
-
-            Array.Copy(array, 0, left, 0, mid);
-            Array.Copy(array, mid, right, 0, array.Length - mid);
-
-            // Рекурсивно сортируем левую и правую части
-            Sort(left);
-            Sort(right);
-
-            // Объединяем результаты
-            Merge(array, left, right);
+            int[] array = (int[])_history[0].Clone(); // Берем начальный массив
+            PerformMergeSort(array, 0, array.Length - 1);
         }
 
-        private void Merge(int[] array, int[] left, int[] right)
+        private void PerformMergeSort(int[] array, int left, int right)
         {
-            int i = 0, j = 0, k = 0;
-
-            while (i < left.Length && j < right.Length)
+            if (left < right)
             {
-                if (left[i] <= right[j])
+                int mid = left + (right - left) / 2;
+
+                // Рекурсивно сортируем левую и правую части
+                PerformMergeSort(array, left, mid);
+                PerformMergeSort(array, mid + 1, right);
+
+                // Объединяем результаты
+                Merge(array, left, mid, right);
+            }
+        }
+
+        private void Merge(int[] array, int left, int mid, int right)
+        {
+            int n1 = mid - left + 1;
+            int n2 = right - mid;
+
+            // Создаем временные массивы
+            int[] leftArray = new int[n1];
+            int[] rightArray = new int[n2];
+
+            Array.Copy(array, left, leftArray, 0, n1);
+            Array.Copy(array, mid + 1, rightArray, 0, n2);
+
+            int i = 0, j = 0, k = left;
+
+            // Объединяем временные массивы
+            while (i < n1 && j < n2)
+            {
+                if (leftArray[i] <= rightArray[j])
                 {
-                    array[k++] = left[i++];
+                    array[k++] = leftArray[i++];
                 }
                 else
                 {
-                    array[k++] = right[j++];
+                    array[k++] = rightArray[j++];
                 }
             }
 
-            while (i < left.Length)
+            while (i < n1)
             {
-                array[k++] = left[i++];
+                array[k++] = leftArray[i++];
             }
 
-            while (j < right.Length)
+            while (j < n2)
             {
-                array[k++] = right[j++];
+                array[k++] = rightArray[j++];
             }
 
+            // Сохраняем текущее состояние массива
             SaveState((int[])array.Clone());
         }
 

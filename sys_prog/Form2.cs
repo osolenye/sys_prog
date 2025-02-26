@@ -123,6 +123,7 @@ namespace sys_prog
                     break;
                 case "Merge Sort":
                     _currentAlgorithm = new MergeSort(array);
+                    ((MergeSort)_currentAlgorithm).Sort(); // Запускаем сортировку
                     break;
                 default:
                     MessageBox.Show("Неизвестный алгоритм.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
