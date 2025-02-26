@@ -14,7 +14,6 @@ namespace sys_prog
             tabControl1.TabPages.Clear();
 
             // Настройка TabControl
-            tabControl1.Dock = DockStyle.Fill; // Занимает всё доступное пространство
             tabControl1.Location = new Point(0, 50);
             tabControl1.Size = new System.Drawing.Size(800, 400);
             tabControl1.TabIndex = 1;
