@@ -6,21 +6,17 @@ namespace sys_prog
 {
     public partial class Form1 : Form
     {
-
         public Form1()
         {
             InitializeComponent();
+            // Очищаем все существующие вкладки
+            tabControl1.TabPages.Clear();
 
-            // Создаем TabControl
-            tabControl1 = new TabControl
-            {
-                Dock = DockStyle.Fill, // Занимает всё доступное пространство
-                Location = new Point(0, 50),
-                Name = "tabControl1",
-                Size = new System.Drawing.Size(800, 400),
-                TabIndex = 1
-            };
-            this.Controls.Add(tabControl1); // Добавляем TabControl на форму
+            // Настройка TabControl
+            tabControl1.Dock = DockStyle.Fill; // Занимает всё доступное пространство
+            tabControl1.Location = new Point(0, 50);
+            tabControl1.Size = new System.Drawing.Size(800, 400);
+            tabControl1.TabIndex = 1;
 
             // Добавляем информацию о каждом алгоритме
             AddAlgorithmTab("Сортировка пузырьком", "Bubble Sort",
@@ -89,6 +85,18 @@ public class LinearSearch
             }
         }
         return -1; // Элемент не найден
+    }
+}");
+
+            AddAlgorithmTab("Без видео", "Пример без видео",
+                "Этот алгоритм не имеет ссылки на видео.",
+                null, // Нет ссылки на видео
+                @"
+public class Example
+{
+    public static void Run()
+    {
+        Console.WriteLine(""Пример без видео."");
     }
 }");
         }
@@ -160,6 +168,11 @@ public class LinearSearch
 
             // Добавляем вкладку в TabControl
             tabControl1.TabPages.Add(tabPage);
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
