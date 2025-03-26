@@ -82,28 +82,41 @@ namespace sys_prog
         //    }
         //}
         private void UpdateDataGridView()
+{
+    if (_currentAlgorithm == null)
+        return;
+
+    int[] currentArray = _currentAlgorithm.GetArray();
+    (int firstIndex, int secondIndex) = _currentAlgorithm.GetSwappedIndices(); // Получаем последние измененные индексы
+
+    // Проверяем, есть ли нужные столбцы, если нет — добавляем
+    if (dataGridViewArray.ColumnCount == 0)
+    {
+        dataGridViewArray.Columns.Add("Index", "Индекс");
+        dataGridViewArray.Columns.Add("Value", "Значение");
+    }
+
+    // Очищаем перед обновлением
+    dataGridViewArray.Rows.Clear();
+
+    for (int i = 0; i < currentArray.Length; i++)
+    {
+        int rowIndex = dataGridViewArray.Rows.Add(i, currentArray[i]);
+
+        // Подсвечиваем только те элементы, которые были поменяны местами
+        if (i == firstIndex || i == secondIndex)
         {
-            // Очищаем все строки
-            dataGridViewArray.Rows.Clear();
-
-            if (_currentAlgorithm == null)
-                return;
-
-            int[] currentArray = _currentAlgorithm.GetArray();
-
-            // Если столбцы еще не созданы, создаем один столбец
-            if (dataGridViewArray.ColumnCount == 0)
-            {
-                dataGridViewArray.Columns.Add("Value", "Значение");
-            }
-
-            // Добавляем каждое значение массива как новую строку
-            foreach (int value in currentArray)
-            {
-                // Убедитесь, что значение добавляется как объект
-                dataGridViewArray.Rows.Add(new object[] { value });
-            }
+            dataGridViewArray.Rows[rowIndex].Cells[1].Style.BackColor = Color.LightGreen; // Подсветка измененных значений
+            dataGridViewArray.Rows[rowIndex].Cells[1].Style.ForeColor = Color.Black;
         }
+        else
+        {
+            dataGridViewArray.Rows[rowIndex].Cells[1].Style.BackColor = Color.White;
+            dataGridViewArray.Rows[rowIndex].Cells[1].Style.ForeColor = Color.Black;
+        }
+    }
+}
+
         private void InitializeAlgorithm(int[] array)
         {
             if (comboBoxAlgorithm.SelectedItem == null)

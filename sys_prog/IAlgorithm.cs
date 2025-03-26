@@ -12,5 +12,6 @@ namespace sys_prog
         bool PreviousStep(); // Возвращает на предыдущий шаг
         void Reset(); // Сбрасывает алгоритм к начальному состоянию
         int[] GetArray(); // Возвращает текущее состояние массива
+        public (int, int) GetSwappedIndices();
     }
 }

@@ -7,36 +7,37 @@ namespace sys_prog
     {
         private List<int[]> _history; // История изменений
         private int _step; // Текущий индекс в истории
+        private int lastSwapped1 = -1, lastSwapped2 = -1; // Индексы последних перестановок
 
         public BubbleSort(int[] array)
         {
             _history = new List<int[]>();
-            SaveState(array); // Сохраняем начальное состояние
+            SaveState(array, -1, -1); // Начальное состояние, без перестановок
             _step = 0;
         }
 
         public bool NextStep()
         {
-            // Получаем текущий массив из истории
             if (_step >= GetCurrentArrayLength() - 1)
                 return false;
 
-            // Клонируем текущее состояние массива
             int[] currentArray = (int[])_history[_step].Clone();
+            bool swapped = false;
 
-            // Выполняем один шаг сортировки
             for (int i = 0; i < currentArray.Length - _step - 1; i++)
             {
                 if (currentArray[i] > currentArray[i + 1])
                 {
                     Swap(currentArray, i, i + 1);
+                    lastSwapped1 = i;
+                    lastSwapped2 = i + 1;
+                    swapped = true;
                 }
             }
 
-            // Сохраняем новое состояние
-            SaveState(currentArray);
+            if (!swapped) return false; // Если перестановок не было, выходим
 
-            // Переходим к следующему шагу
+            SaveState(currentArray, lastSwapped1, lastSwapped2);
             _step++;
             return true;
         }
@@ -46,26 +47,30 @@ namespace sys_prog
             if (_step <= 0)
                 return false;
 
-            // Возвращаемся на предыдущий шаг
             _step--;
             return true;
         }
 
         public void Reset()
         {
-            _step = 0; // Возвращаемся к началу
+            _step = 0;
         }
 
         public int[] GetArray()
         {
-            // Возвращаем текущее состояние массива
             return (int[])_history[_step].Clone();
         }
 
-        private void SaveState(int[] array)
+        public (int, int) GetSwappedIndices()
         {
-            // Сохраняем копию массива в историю
+            return (lastSwapped1, lastSwapped2);
+        }
+
+        private void SaveState(int[] array, int swapped1, int swapped2)
+        {
             _history.Add((int[])array.Clone());
+            lastSwapped1 = swapped1;
+            lastSwapped2 = swapped2;
         }
 
         private void Swap(int[] array, int i, int j)
@@ -77,7 +82,6 @@ namespace sys_prog
 
         private int GetCurrentArrayLength()
         {
-            // Возвращаем длину текущего массива из истории
             if (_history.Count == 0)
                 return 0;
 

@@ -7,11 +7,12 @@ namespace sys_prog
     {
         private List<int[]> _history; // Хранит историю изменений массива
         private int _step; // Текущий индекс в истории
+        private int lastSwapped1 = -1, lastSwapped2 = -1; // Индексы последних перестановок
 
         public SelectionSort(int[] array)
         {
             _history = new List<int[]>();
-            SaveState(array); // Сохраняем начальное состояние
+            SaveState(array, -1, -1); // Сохраняем начальное состояние без перестановок
             _step = 0;
         }
 
@@ -38,10 +39,17 @@ namespace sys_prog
             if (minIndex != _step)
             {
                 Swap(currentArray, _step, minIndex);
+                lastSwapped1 = _step;
+                lastSwapped2 = minIndex;
+            }
+            else
+            {
+                lastSwapped1 = -1;
+                lastSwapped2 = -1;
             }
 
             // Сохраняем новое состояние
-            SaveState(currentArray);
+            SaveState(currentArray, lastSwapped1, lastSwapped2);
 
             // Переходим к следующему шагу
             _step++;
@@ -69,10 +77,17 @@ namespace sys_prog
             return (int[])_history[_step].Clone();
         }
 
-        private void SaveState(int[] array)
+        public (int, int) GetSwappedIndices()
+        {
+            return (lastSwapped1, lastSwapped2);
+        }
+
+        private void SaveState(int[] array, int swapped1, int swapped2)
         {
             // Сохраняем копию массива в историю
             _history.Add((int[])array.Clone());
+            lastSwapped1 = swapped1;
+            lastSwapped2 = swapped2;
         }
 
         private void Swap(int[] array, int i, int j)

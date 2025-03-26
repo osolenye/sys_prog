@@ -44,5 +44,11 @@ namespace sys_prog
         {
             return (int[])_array.Clone(); // Возвращаем копию массива
         }
+
+        public (int, int) GetSwappedIndices()
+        {
+            return (-1, -1); // Линейный поиск не выполняет перестановок
+        }
+
     }
 }

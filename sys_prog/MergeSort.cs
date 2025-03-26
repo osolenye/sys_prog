@@ -113,5 +113,11 @@ namespace sys_prog
             // Сохраняем копию массива в историю
             _history.Add((int[])array.Clone());
         }
+
+        public (int, int) GetSwappedIndices()
+        {
+            return (-1, -1); // Merge Sort не делает перестановок отдельных элементов
+        }
+
     }
 }
